@@ -18,6 +18,9 @@ def Encrypter(Text, key):
         if int(num) >= 10 and int(num) <= 95 and int(num) % 5 == 0:
             enlist.insert(index, Let_Dict[num])
             enlist.pop(index+1)
+        elif int(num) > 65 and int(num) < 75:
+            enlist.insert(index, Let_Dict[num])
+            enlist.pop(index+1)
         index += 1
     enlist = ",".join(enlist)
     enlist = enlist[-1::-1]
