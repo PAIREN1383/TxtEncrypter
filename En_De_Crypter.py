@@ -5,11 +5,14 @@ Let_Dict = {"10":"a", "15":"b", "20":"c", "25":"d", "30":"e", "35":"f", "40":"g"
 
 def Encrypter(Text, key):
     enlist = []
+    Intkey0 = int(key[0].strip())
+    Intkey1 = int(key[1].strip())
     e = 0
+    e2 = Intkey0 - Intkey1
     for char in Text:
         e += 1
-        enlist.append(str(ord(char) - int(key[0].strip()) + e))
-        if e == int(key[1].strip()):
+        enlist.append(str(ord(char) - Intkey0 + e + e2))
+        if e == Intkey1:
             e = 0
     enlist.reverse()
     index = 0
@@ -40,11 +43,14 @@ def Decrypter(EnText, Dekey):
         index += 1
     EnText.reverse()
     txtlist = []
+    IntDekey0 = int(Dekey[0].strip())
+    IntDekey1 = int(Dekey[1].strip())
     d = 0
+    d2 = IntDekey0 - IntDekey1
     for num in EnText:
         d += 1
-        txtlist.append(str(chr(int(num) + int(Dekey[0].strip()) - d)))
-        if d == int(Dekey[1].strip()):
+        txtlist.append(str(chr(int(num) + IntDekey0 - d - d2)))
+        if d == IntDekey1:
             d = 0
     return "".join(txtlist)
 
@@ -84,6 +90,7 @@ while True:
         \n[2] Decryption \
         \n[3] Encryption txt File \
         \n[4] Decryption txt File \
+        \n[5] Help \
         \nEnter 'e' or 'q' to exit the program. \
         \nEnter your choice: ")
     if choice.lower() == "e" or choice.lower() == "exit" or choice.lower() == "q" or choice.lower() == "quit":
@@ -103,7 +110,7 @@ while True:
         Text = Decrypter(Entext, DeKey)
         print("<<<<<<<<<<<<<<<<<<<<<<<< Result >>>>>>>>>>>>>>>>>>>>>>>>\n" + Text)
     elif choice == "3":
-        Path_File = input("Enter path of your txt file (ex: C:\\Users\\YOU\\): ").strip()
+        Path_File = input("Enter path of your txt file (ex: E:\\Secrets\\): ").strip()
         EnKey = input("Please enter key (ex:32,10): ").strip().split(",")
         if EnKey == [""]:
             continue
@@ -114,11 +121,11 @@ while True:
             NFN = "En_De_cryptedFile.txt"
         if NFN == "":
             NFN = "En_De_cryptedFile.txt"
-        print(f"Your File Name: {NFN} \nYour File Path: {Path_File}\\{NFN}\n")
+        print(f"Your File Name: {NFN} \nYour File Path: {Path_File}{NFN}")
         EncryptFile(Path_File, NF, NFN, EnKey)
         print("<<< Done Successfully! >>>")
     elif choice == "4":
-        Path_File = input("Enter path of your txt file (ex: C:\\Users\\YOU\\): ").strip()
+        Path_File = input("Enter path of your txt file (ex: E:\\Secrets\\): ").strip()
         DeKey = input("Please enter key (ex:32,10): ").strip().split(",")
         if DeKey == [""]:
             continue
@@ -131,6 +138,37 @@ while True:
             NFN = "En_De_cryptedFile.txt"
         print(f"Your File Name: {NFN} \nYour File Path: {Path_File}{NFN}")
         DecryptFile(Path_File, NF, NFN, DeKey)
-        print("<<< Done Successfully! >>>")  
+        print("<<< Done Successfully! >>>")
+    elif choice == 5:
+        print("""
+            You can do the following example:
+            
+            ***** Example 1 *****
+            Enter 'e' or 'q' to exit the program.
+            Enter your choice: 3
+            Enter path of your txt file (ex: E:\\Secrets\\): E:\\PythonFiles\\TxtEncrypter\\
+            Please enter key (ex:32,10): 32,10
+            Enter name of your txt file (ex: secret.txt): Secret.txt
+            Enter file name for your new txt file(Do not use only space and this characters[\/?:*"]): EnSecret.txt
+            Your File Name: EnSecret.txt
+            Your File Path: E:\\PythonFiles\\TxtEncrypter\\EnSecret.txt
+            <<< Done Successfully! >>>
+            
+            
+            ***** Example 2 *****
+            Enter 'e' or 'q' to exit the program.
+            Enter your choice: 4
+            Enter path of your txt file (ex: E:\\Secrets\\): E:\\PythonFiles\\TxtEncrypter\\
+            Please enter key (ex:32,10): 32,10
+            Enter name of your txt file (ex: secret.txt): EnSecret.txt
+            Enter file name for your new txt file(Do not use only space and this characters[\/?:*"]): DeSecret.txt
+            Your File Name: DeSecret.txt
+            Your File Path: E:\\PythonFiles\\TxtEncrypter\\DeSecret.txt
+            <<< Done Successfully! >>>
+            
+            Ways of communication with me:
+            Telegram: https://t.me/V_d_P_h_k
+            Github: https://github.com/PAIREN1383
+            """)
     else:
         print("<<< Please enter a number. >>>")
